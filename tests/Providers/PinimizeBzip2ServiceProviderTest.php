@@ -4,11 +4,11 @@ namespace Pinimize\Bzip2\Tests\Providers;
 
 use Illuminate\Support\Facades\Config;
 use PHPUnit\Framework\Attributes\Test;
-use Pinimize\Facades\Compression;
-use Pinimize\Facades\Decompression;
 use Pinimize\Bzip2\Compression\Bzip2Driver as Bzip2CompressionDriver;
 use Pinimize\Bzip2\Decompression\Bzip2Driver as Bzip2DecompressionDriver;
 use Pinimize\Bzip2\Tests\TestCase;
+use Pinimize\Facades\Compression;
+use Pinimize\Facades\Decompression;
 
 class PinimizeBzip2ServiceProviderTest extends TestCase
 {

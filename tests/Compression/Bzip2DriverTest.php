@@ -12,18 +12,18 @@ use RuntimeException;
 
 class Bzip2DriverTest extends TestCase
 {
-    private Bzip2Driver $bz2Driver;
+    private Bzip2Driver $bzip2Driver;
 
     protected function setUp(): void
     {
         parent::setUp();
-        $this->bz2Driver = new Bzip2Driver([]);
+        $this->bzip2Driver = new Bzip2Driver([]);
     }
 
     #[Test]
     public function it_can_get_correct_file_extension(): void
     {
-        $this->assertEquals('bz2', $this->bz2Driver->getFileExtension());
+        $this->assertEquals('bz2', $this->bzip2Driver->getFileExtension());
     }
 
     #[Test]
@@ -34,7 +34,7 @@ class Bzip2DriverTest extends TestCase
             $this->markTestSkipped('Bzip2 extension is not installed');
         }
 
-        $compressed = $this->bz2Driver->string($input);
+        $compressed = $this->bzip2Driver->string($input);
         $this->assertEquals($expectedOutput, $compressed);
         $this->assertNotEquals($input, $compressed);
     }
@@ -58,7 +58,7 @@ class Bzip2DriverTest extends TestCase
         $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage('Bzip2 extension is not installed');
 
-        $this->bz2Driver->string('Test');
+        $this->bzip2Driver->string('Test');
     }
 
     #[Test]
@@ -72,7 +72,7 @@ class Bzip2DriverTest extends TestCase
         fwrite($input, 'Hello, World!');
         rewind($input);
 
-        $resource = $this->bz2Driver->resource($input, []);
+        $resource = $this->bzip2Driver->resource($input, []);
 
         $this->assertIsResource($resource);
         $this->assertEquals(bzcompress('Hello, World!'), stream_get_contents($resource));
@@ -97,7 +97,7 @@ class Bzip2DriverTest extends TestCase
         $resource = fopen($sourceFile, 'r');
         $this->assertNotFalse($resource, 'Failed to open source file');
 
-        $data = $this->bz2Driver->string($resource);
+        $data = $this->bzip2Driver->string($resource);
 
         $bytesWritten = file_put_contents($targetFile, $data);
 
@@ -138,7 +138,7 @@ class Bzip2DriverTest extends TestCase
         $this->assertNotFalse($outputResource, 'Failed to open target file for writing');
 
         // Use the resource method of LzfDriver
-        $compressedResource = $this->bz2Driver->resource($inputResource);
+        $compressedResource = $this->bzip2Driver->resource($inputResource);
 
         // Copy the compressed data to the output file
         stream_copy_to_stream($compressedResource, $outputResource);

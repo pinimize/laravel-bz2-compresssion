@@ -6,19 +6,19 @@ namespace Pinimize\Bzip2\Tests\Decompression;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
-use Pinimize\Exceptions\InvalidCompressedDataException;
 use Pinimize\Bzip2\Decompression\Bzip2Driver;
 use Pinimize\Bzip2\Tests\TestCase;
+use Pinimize\Exceptions\InvalidCompressedDataException;
 use RuntimeException;
 
 class Bzip2DriverTest extends TestCase
 {
-    private Bzip2Driver $bz2Driver;
+    private Bzip2Driver $bzip2Driver;
 
     protected function setUp(): void
     {
         parent::setUp();
-        $this->bz2Driver = new Bzip2Driver([]);
+        $this->bzip2Driver = new Bzip2Driver([]);
     }
 
     #[Test]
@@ -29,7 +29,7 @@ class Bzip2DriverTest extends TestCase
             $this->markTestSkipped('Bzip2 extension is not installed');
         }
 
-        $decompressed = $this->bz2Driver->string($input);
+        $decompressed = $this->bzip2Driver->string($input);
         $this->assertEquals($expectedOutput, $decompressed);
         $this->assertNotEquals($input, $decompressed);
     }
@@ -53,7 +53,7 @@ class Bzip2DriverTest extends TestCase
         $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage('Bzip2 extension is not installed');
 
-        $this->bz2Driver->string('Test');
+        $this->bzip2Driver->string('Test');
     }
 
     #[Test]
@@ -66,7 +66,7 @@ class Bzip2DriverTest extends TestCase
         $this->expectException(InvalidCompressedDataException::class);
         $this->expectExceptionMessage('Failed to decompress Bzip2 data');
 
-        $this->bz2Driver->string('Invalid compressed data');
+        $this->bzip2Driver->string('Invalid compressed data');
     }
 
     #[Test]
@@ -81,7 +81,7 @@ class Bzip2DriverTest extends TestCase
         fwrite($input, $compressed);
         rewind($input);
 
-        $resource = $this->bz2Driver->resource($input, []);
+        $resource = $this->bzip2Driver->resource($input, []);
 
         $this->assertIsResource($resource);
         $this->assertEquals('Hello, World!', stream_get_contents($resource));
