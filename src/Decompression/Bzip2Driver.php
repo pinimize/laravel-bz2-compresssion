@@ -37,7 +37,7 @@ class Bzip2Driver extends AbstractDecompressionDriver
             throw new InvalidCompressedDataException('Failed to decompress Bzip2 data');
         }
 
-        if ($result === false ||is_int($result)) {
+        if ($result === false || is_int($result)) {
             throw new InvalidCompressedDataException('Failed to decompress Bzip2 data');
         }
 
