@@ -20,7 +20,7 @@
   ],
   "require": {
     "php": "^8.2",
-    "pinimize/laravel-compression-and-archive": "^0.2",
+    "pinimize/laravel-compression-and-archive": "^0.2 || ^0.3",
     "ext-fileinfo": "*",
     "ext-bz2": "*"
   },
